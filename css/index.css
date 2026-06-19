@@ -1,0 +1,217 @@
+
+* {
+  font-family: "Nunito", sans-serif;
+
+}
+
+body{
+background-color: rgb(255, 255, 255);
+}
+
+
+.logo-carpinteria {
+    display: flex;
+    height: 80px;
+}
+
+.nav-link{ 
+    color: #804000;
+    font-size: 15px;
+    font-weight: 400;
+    text-indent: 15px
+}
+
+.dropdown-item {
+    font-size: 13px;
+}
+
+.btn {
+    color: #804000;
+    transition: backgorund-color 0.3s ease, color 0.3s ease;
+    border-color: #804000;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.btn:hover {
+    background-color: #804000;
+    color: white;
+    border-color: #804000;
+}
+
+.btn:active {
+    background-color: #804000;
+    color: #804000;
+}
+
+h1 {
+    text-align: center;
+    color: #804000;
+    font-family: "Metamorphous", serif;
+    font-style: italic;
+    padding: 40px;
+}
+
+h2 {
+    text-align: center;
+    color: #804000;
+    font-family: "Metamorphous", serif;
+    font-style: italic;
+    padding: 100px;
+}
+
+.inicio-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-template-rows: repeat(1, 500px);
+    padding: 30px;
+    place-items: center;
+}
+
+.inicio-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    padding: 30px;
+    place-items: center;
+}
+
+.foto-inicio {
+    display: flex;
+    flex-direction: column;
+    background-color: #F5F5DC;
+    padding: 10px;
+    text-align: center;
+    font-size: 25px;
+    text-decoration: underline;
+    font-style: bold;
+    
+}
+
+
+.boton-mas-info {
+    color: #804000;
+    transition: backgorund-color 0.3s ease, color 0.3s ease;
+    border-color: #804000;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.boton-mas-info:hover {
+    background-color: #804000;
+    color: white;
+    border-color: #804000;
+}
+.boton-mas-info:active {
+    background-color: #804000;
+    color: #804000;
+}
+
+.testimonios-foto {
+    display: flex;
+    justify-content: space-around;
+    height: 370px;
+    background-color: #F5F5DC;
+    padding: 15px;
+    
+}   
+
+.testimonios-texto {
+    font-size: 25px;
+    
+}
+
+.testimonios-texto::first-line {
+    color: #D4AC25;
+    font-weight: bold;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgb(94, 94, 94)
+}
+
+.info-adicional {
+    font-size: 30px;
+    padding: 100px;
+    
+}
+
+.bi-truck {
+    font-size: 50px;
+    padding: 100px;
+    color: #804000;
+}
+
+.bi-credit-card {
+    font-size: 50px;
+    padding: 100px;
+    color: #804000;
+}
+
+.bi-shield-check {
+    font-size: 50px;
+    padding: 100px;
+    color: #804000;
+}
+
+h3 {
+    font-size: 40px;
+    text-decoration: underline;
+    color: #804000;
+    padding: 20px;
+}
+
+.datos-de-contacto {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+footer{
+    background-color: rgb(212, 172, 37);
+    
+}
+
+.títulos-nosotros {
+
+    text-align: start;
+    color: #804000;
+    font-family: "Metamorphous", serif;
+    font-style: italic;
+    font-size: 40px;
+    padding: 10px;
+}
+
+.col-valores {
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+    font-size: 25px;
+    padding: 40px;
+}
+
+.texto-valores::first-line {
+    color: #804000;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.texto-nosotros {
+    font-size: 25px;
+    padding: 50px;
+}
+
+.form-group {
+    font-size: 25px;
+    padding: 10px;
+}
+
+.btn-outline-success-summit {
+    margin: 20px;
+}
+
+.container-presupuesto {
+    background-color: #F5F5DC;
+    margin: 60px;
+    padding: 40px;
+    border-radius: 50px;
+}
+
+
