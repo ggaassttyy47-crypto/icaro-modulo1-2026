@@ -60,33 +60,16 @@ h2 {
     padding: 100px;
 }
 
-.inicio-1 {
-    display: grid;
-    grid-template-columns: repeat(2, 2fr);
-    grid-template-rows: repeat(1, 500px);
-    padding: 30px;
-    place-items: center;
-}
-
-.inicio-2 {
-    display: grid;
-    grid-template-columns: repeat(2, 2fr);
-    padding: 30px;
-    place-items: center;
-}
-
 .foto-inicio {
-    display: flex;
-    flex-direction: column;
     background-color: #F5F5DC;
     padding: 10px;
+    margin: 10px;
     text-align: center;
     font-size: 25px;
     text-decoration: underline;
     font-style: bold;
     
 }
-
 
 .boton-mas-info {
     color: #804000;
@@ -169,49 +152,5 @@ footer{
     
 }
 
-.títulos-nosotros {
-
-    text-align: start;
-    color: #804000;
-    font-family: "Metamorphous", serif;
-    font-style: italic;
-    font-size: 40px;
-    padding: 10px;
-}
-
-.col-valores {
-    display: flex;
-    align-items: flex-start;
-    text-align: center;
-    font-size: 25px;
-    padding: 40px;
-}
-
-.texto-valores::first-line {
-    color: #804000;
-    text-decoration: underline;
-    text-align: center;
-}
-
-.texto-nosotros {
-    font-size: 25px;
-    padding: 50px;
-}
-
-.form-group {
-    font-size: 25px;
-    padding: 10px;
-}
-
-.btn-outline-success-summit {
-    margin: 20px;
-}
-
-.container-presupuesto {
-    background-color: #F5F5DC;
-    margin: 60px;
-    padding: 40px;
-    border-radius: 50px;
-}
 
 

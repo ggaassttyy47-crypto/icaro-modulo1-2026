@@ -1,0 +1,91 @@
+* {
+  font-family: "Nunito", sans-serif;
+
+}
+
+body{
+background-color: rgb(255, 255, 255);
+}
+
+.logo-carpinteria {
+    display: flex;
+    height: 80px;
+}
+
+.nav-link{ 
+    color: #804000;
+    font-size: 15px;
+    font-weight: 400;
+    text-indent: 15px
+}
+
+.dropdown-item {
+    font-size: 13px;
+}
+
+.btn {
+    color: #804000;
+    transition: backgorund-color 0.3s ease, color 0.3s ease;
+    border-color: #804000;
+    border-radius: 10px;
+    border: 1px solid;
+}
+
+.btn:hover {
+    background-color: #804000;
+    color: white;
+    border-color: #804000;
+}
+
+.btn:active {
+    background-color: #804000;
+    color: #804000;
+}
+
+h1 {
+    text-align: center;
+    color: #804000;
+    font-family: "Metamorphous", serif;
+    font-style: italic;
+    padding: 40px;
+}
+
+.datos-de-contacto {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+footer{
+    background-color: rgb(212, 172, 37);
+    
+}
+
+.títulos-nosotros {
+
+    text-align: start;
+    color: #804000;
+    font-family: "Metamorphous", serif;
+    font-style: italic;
+    font-size: 40px;
+    padding: 10px;
+}
+
+.col-valores {
+    display: flex;
+    align-items: flex-start;
+    text-align: center;
+    font-size: 25px;
+    padding: 40px;
+}
+
+.texto-valores::first-line {
+    color: #804000;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.texto-nosotros {
+    font-size: 25px;
+    padding: 50px;
+}
