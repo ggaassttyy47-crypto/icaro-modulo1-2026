@@ -80,3 +80,15 @@ footer{
 .carousel-item {
     height: 500px;
 }
+
+.container-calculadora-muebles {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+}
+.calculadora-muebles {
+    grid-column: 2/6;
+}
+
+.resumen-calculadora {
+    grid-column: 7/10;
+}
