@@ -184,6 +184,7 @@
     <div class="resumenMueble">
         <h3>Tu mueble ideal</h3>
         <p>Resumen de tu mueble a medida</p>
+        <div id="presupuesto-resumen"></div>
         <ul class="list-group list-group-flush" id="datos-resumen" hidden>
             <li class="list-group-item" id="resumen-tipo"></li>
             <li class="list-group-item" id="resumen-altura"></li>
@@ -196,50 +197,19 @@
     </div>        
 </div>
 
+<script src="js/Mueble.js"></script>
+<script src="js/Biblioteca.js"></script>
+<script src="js/Comoda.js"></script>
+<script src="js/Placard.js"></script>
+<script src="js/Resumen.js"></script>
+<script src="js/MuebleFactory.js"></script>
+<script src="js/Presupuesto.js"></script>
+
 <script>
-
-    function deshabilitarForm(){
-
-    }
-
-    class Mueble{
-        constructor(altura = '', ancho = '', profundidad = '', tipoDeMadera = ''){
-            this.altura = altura
-            this.ancho = ancho
-            this.profundidad = profundidad
-            this.tipoDeMadera = tipoDeMadera
-        }
-    }
-
-    class Biblioteca extends Mueble{ 
-        constructor(tipoMueble, cantidadEstantes){
-            super(altura, ancho, profundidad)
-            this.tipoMueble = 'biblioteca'
-            this.cantidadEstantes = cantidadEstantes
-        }
-    }
-
-    const biblioteca = new Biblioteca (altura = '', ancho = '', profundidad = '')
-    
-    class Placard extends Mueble{
-        constructor(tipoMueble, cantidadPuertas){
-            super(altura, ancho, profundidad)
-            this.tipoMueble = 'placard'
-            this.cantidadPuertas = cantidadPuertas
-        }
-    }
-
-    const placard = new Placard (altura = '', ancho = '', profundidad = '')
-
-    class Comoda extends Mueble{
-        constructor(tipoMueble, cantidadCajones){
-            super(altura, ancho, profundidad)
-            this.tipoMueble = 'comoda'
-            this.cantidadCajones = cantidadCajones
-        }
-    }
-
-    const comoda = new Comoda (altura = '', ancho = '', profundidad = '')
+    const maderas = [
+        { name : 'Pino', price : 500, stock : 0 },
+        { name : 'Melamina', price : 750, stock : 1 },
+    ]
 
     const preciosTipoMaderas = {
         pino: '500',
@@ -249,241 +219,12 @@
         roble: '1500',
     }
 
-    const selectorMueble = document.querySelector(".tipoMueble")
+    // Instancia del formulario
+    const formularioDePresupuesto = new Presupuesto;
     
-    const bloqueEstantes = document.querySelector(".cantidad-estantes")
-
-    const bloquePuertas = document.querySelector(".cantidad-puertas")
-
-    const bloqueCajones = document.querySelector(".cantidad-cajones")
-
-    const imputEstantes = document.querySelector("#cantidad-estantes")
-
-    const imputPuertas = document.querySelector("#cantidad-puertas")
-
-    const imputCajones = document.querySelector("#cantidad-cajones")
-
-    const inputAltura = document.querySelector("#altura")
-
-    const inputAncho = document.querySelector("#ancho")
-
-    const inputProfundidad = document.querySelector("#profundidad")
-
-    const selectorMadera = document.querySelector("#tipo-de-madera")
-
-    const resumenTipo = document.querySelector("#resumen-tipo")
-
-    const resumenAltura = document.querySelector("#resumen-altura")
-
-    const resumenAncho = document.querySelector("#resumen-ancho")
-
-    const resumenProfundidad = document.querySelector("#resumen-profundidad")
-
-    const resumenMadera = document.querySelector("#resumen-madera")
-
-    const resumenCantidad = document.querySelector("#resumen-cantidad")
-
-    const resumenPrecio = document.querySelector("#resumen-precio")
-
-    let muebleSeleccionado = null
-
-    const resumenMueble = {
-        muebleSeleccionado: null,
-
-        mostrarDescripcion: function(){
-            if(!this.muebleSeleccionado){
-            return
-           } else if(this.muebleSeleccionado){
-            document.querySelector("#datos-resumen").hidden = false
-           } else if(this.muebleSeleccionado === ''){
-            document.querySelector("#datos-resumen").hidden = true
-           } 
-
-           resumenAltura.textContent = `Altura: ${this.muebleSeleccionado.altura} cm`
-           resumenAncho.textContent = `Ancho: ${this.muebleSeleccionado.ancho} cm`
-           resumenProfundidad.textContent = `Profundidad: ${this.muebleSeleccionado.profundidad} cm`
-           resumenMadera.textContent = `Tipo de madera: ${this.muebleSeleccionado.tipoDeMadera}`
-           resumenTipo.textContent = `Mueble seleccionado: ${this.muebleSeleccionado.tipoMueble}`
-
-
-        switch(this.muebleSeleccionado.tipoMueble){
-
-        case "biblioteca":
-            resumenCantidad.textContent = `Cantidad de estantes: ${this.muebleSeleccionado.cantidadEstantes}`
-        break
-
-        case "placard":
-            resumenCantidad.textContent = `Cantidad de puertas: ${this.muebleSeleccionado.cantidadPuertas}`
-        break
-
-        case "comoda":
-            resumenCantidad.textContent = `Cantidad de cajones: ${this.muebleSeleccionado.cantidadCajones}`
-        break
-        
-        }
-        },
-        
-       
-        precio: function(){
-             let cantidad 
-             
-            switch(this.muebleSeleccionado.tipoMueble){
-            case "biblioteca":
-                cantidad = this.muebleSeleccionado.cantidadEstantes
-            break
-
-            case "placard":
-                cantidad = this.muebleSeleccionado.cantidadPuertas
-            break
-
-            case "comoda":
-                cantidad = this.muebleSeleccionado.cantidadCajones
-            break
-        }
-
-        const precioMadera = preciosTipoMaderas[this.muebleSeleccionado.tipoDeMadera]
-
-            return ((this.muebleSeleccionado.altura * this.muebleSeleccionado.ancho * this.muebleSeleccionado.profundidad + cantidad * 5)) * precioMadera 
-
-            
-        }
-
-        /*mostrarPrecio: function(){
-        const precioFinal = this.precio()
-
-        resumenPrecio.textContent = `Precio: $${precioFinal}`
-        }*/
-        
-    }
-
-
-    function deshabilitarForm(){
-        inputAltura.disabled = true
-        inputAncho.disabled = true
-        inputProfundidad.disabled = true
-        selectorMadera.disabled = true
-    }
-
-    function habilitarForm(){
-        inputAltura.disabled = false
-        inputAncho.disabled = false
-        inputProfundidad.disabled = false
-        selectorMadera.disabled = false
-    }
-
-    deshabilitarForm()
-
-    selectorMueble.addEventListener('change', (e) => {
-        const opcionElegida = e.target.value
-    if(opcionElegida !== ''){
-        habilitarForm()
-    } else{
-        deshabilitarForm()
-    }
-    if(opcionElegida === 'biblioteca') {
-        muebleSeleccionado = biblioteca, 
-        resumenMueble.muebleSeleccionado = biblioteca
-
-        bloqueEstantes.hidden = false, 
-        bloquePuertas.hidden = true, 
-        bloqueCajones.hidden = true
-    } else if(opcionElegida === 'placard') {
-        muebleSeleccionado = placard, 
-        resumenMueble.muebleSeleccionado = placard
-
-        bloquePuertas.hidden = false, 
-        bloqueEstantes.hidden = true, 
-        bloqueCajones.hidden = true
-    } else if(opcionElegida === 'comoda') {
-        muebleSeleccionado = comoda, 
-        resumenMueble.muebleSeleccionado = comoda
-
-        bloqueCajones.hidden = false, 
-        bloqueEstantes.hidden = true, 
-        bloquePuertas.hidden = true
-    } else{
-        muebleSeleccionado = null, 
-        resumenMueble.muebleSeleccionado = null
-
-        bloqueEstantes.hidden = true, 
-        bloquePuertas.hidden = true, 
-        bloqueCajones.hidden = true
-    }
-
-    if(!opcionElegida){
-        document.querySelector('#miFormulario').reset();
-    } 
-    resumenMueble.mostrarDescripcion()
-
-    })
-
-    imputEstantes.addEventListener('input', (e) => {
-        const cantidadEstantes = parseInt(e.target.value) 
-        muebleSeleccionado.cantidadEstantes = cantidadEstantes
-    })
-
-    imputPuertas.addEventListener('input', (e) => {
-        const cantidadPuertas = parseInt(e.target.value) 
-        muebleSeleccionado.cantidadPuertas = cantidadPuertas
-    })
-
-    imputCajones.addEventListener('input', (e) => {
-        const cantidadCajones = parseInt(e.target.value) 
-        muebleSeleccionado.cantidadCajones = cantidadCajones
-    })
-
-    inputAltura.addEventListener('input', (e) => {
-        const altura = parseInt(e.target.value)  
-        
-        if(muebleSeleccionado){
-            muebleSeleccionado.altura = altura
-        } else{
-            mostrarError('Por favor, primero seleccione un mueble');
-        }
-
-        resumenMueble.mostrarDescripcion()
-
-    })
-
-    inputAncho.addEventListener('input', (e) => {
-        const ancho = parseInt(e.target.value) 
-        
-        if(muebleSeleccionado){
-            muebleSeleccionado.ancho = ancho
-        } else{
-            mostrarError('Por favor, primero seleccione un mueble');
-        }
-        
-        resumenMueble.mostrarDescripcion()
-
-    })
-
-    inputProfundidad.addEventListener('input', (e) => {
-        const profundidad = parseInt(e.target.value) 
-
-        if(muebleSeleccionado){
-            muebleSeleccionado.profundidad = profundidad
-        } else{
-            mostrarError('Por favor, primero seleccione un mueble');
-        }
-        
-        resumenMueble.mostrarDescripcion()
-
-    })
-
-    selectorMadera.addEventListener('change', (e) => {
-        const tipoDeMadera = e.target.value
-        
-         if(muebleSeleccionado){
-            muebleSeleccionado.tipoDeMadera = tipoDeMadera
-        } else{
-            mostrarError('Por favor, primero seleccione un mueble');
-        }
-
-        resumenMueble.mostrarDescripcion()
-
-    })
-   
+    // Dónde se muestra el resumen
+    let presupuestoResumen = document.querySelector('#presupuesto-resumen');
+    formularioDePresupuesto.setRenderSummaryElement(presupuestoResumen);
 </script>
 
 <div class="container-presupuesto">
