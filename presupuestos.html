@@ -101,8 +101,8 @@
     <div class="carousel-item active">
       <img src="imagenes/foto1presupuestos.webp" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Trabajos con la mejor calidad</h5>
-        <p>Elegí que tipo de madera te gustaría que tuviera tu mueble.</p>
+        <h5>Calculadora de muebles a medida</h5>
+        <p>Configurá tu mueble y obtené un presupuesto estimado al instante.</p>
       </div>
     </div>
     <div class="carousel-item">
@@ -136,7 +136,7 @@
     <div class="calculadora-muebles">
         <h2>Creando tu mueble a medida</h2>
         <form id="miFormulario">
-            <div class="tipoMueble">
+            <div class="tipoMueble mb-4">
                 <label for="tipoMueble">Mueble a construir</label>
                 <select class="form-select" aria-label="Default select example">
                     <option selected value="">Elige el mueble a construir</option>
@@ -145,16 +145,23 @@
                     <option value="comoda">Cómoda</option>
                 </select>
             </div>
-            <p id="mensajeError" style="color: red; display: none;"></p>
-            <div class="elegir-medidas">
-                <div id="medidas">
+            <div id="medidas">
+
+                <div class="campo-medida">
                     <label for="altura">Altura</label>
-                      <input type="text" class="form-control" id="altura" placeholder="Solo números">
+                    <input type="number" min="1" step="1" class="form-control" id="altura" placeholder="Solo números">
+                </div>
+
+                <div class="campo-medida">
                     <label for="ancho">Ancho</label>
-                      <input type="text" class="form-control" id="ancho" placeholder="Solo números">
+                    <input type="number" min="1" step="1" class="form-control" id="ancho" placeholder="Solo números">
+                </div>
+
+                <div class="campo-medida">
                     <label for="profundidad">Profundidad</label>
-                      <input type="text" class="form-control" id="profundidad" placeholder="Solo números">
-                </div>    
+                    <input type="number" min="1" step="1" class="form-control" id="profundidad" placeholder="Solo números">
+                </div>
+
             </div>
             <div class="elegir-tipo-madera">
                 <label for="tipo-de-madera">Elige el tipo de madera</label>
@@ -169,29 +176,33 @@
             </div>
             <div class="cantidad-estantes" hidden>
                 <label for="cantidad-estantes">Cantidad de estantes</label>
-                <input type="text" class="form-control" id="cantidad-estantes" placeholder="1,2,3,4,5,6...">
+                <input type="number" min="1" step="1" class="form-control" id="cantidad-estantes" placeholder="1,2,3,4,5,6...">
             </div>
             <div class="cantidad-puertas" hidden>
                 <label for="cantidad-puertas">Cantidad de puertas</label>
-                <input type="text" class="form-control" id="cantidad-puertas" placeholder="1,2,3,...">
+                <input type="number" min="1" step="1" class="form-control" id="cantidad-puertas" placeholder="1,2,3,...">
             </div>
             <div class="cantidad-cajones" hidden>    
                 <label for="cantidad-cajones">Cantidad de cajones</label>
-                <input type="text" class="form-control" id="cantidad-cajones" placeholder="1,2,3,4,5...">
+                <input type="number" min="1" step="1" class="form-control" id="cantidad-cajones" placeholder="1,2,3,4,5...">
             </div>
         </form>
     </div>        
-    <div class="resumenMueble">
+    <div class="resumenMueble shadow">
         <h3>Tu mueble ideal</h3>
         <p>Resumen de tu mueble a medida</p>
         <ul class="list-group list-group-flush" id="datos-resumen" hidden>
-            <li class="list-group-item" id="resumen-tipo"></li>
-            <li class="list-group-item" id="resumen-altura"></li>
-            <li class="list-group-item" id="resumen-ancho"></li>
-            <li class="list-group-item" id="resumen-profundidad"></li>
-            <li class="list-group-item" id="resumen-madera"></li>
-            <li class="list-group-item" id="resumen-cantidad"></li>
-            <li class="list-group-item" id="resumen-precio"></li>
+            <li class="list-group-item1" id="resumen-tipo"></li>
+            <li class="list-group-item2" id="resumen-altura"></li>
+            <li class="list-group-item3" id="resumen-ancho"></li>
+            <li class="list-group-item4" id="resumen-profundidad"></li>
+            <li class="list-group-item5" id="resumen-madera"></li>
+            <li class="list-group-item6" id="resumen-cantidad"></li>
+            <li class="list-group-item7" id="resumen-precio"></li>
+
+            <button id="btn-presupuesto" hidden>
+                Pedir presupuesto
+            </button>
         </ul>
     </div>        
 </div>
@@ -242,11 +253,11 @@
     const comoda = new Comoda (altura = '', ancho = '', profundidad = '')
 
     const preciosTipoMaderas = {
-        pino: '500',
-        melamina: '750',
-        nogal: '1000',
-        cedro: '1250',
-        roble: '1500',
+        pino: '50',
+        melamina: '75',
+        nogal: '100',
+        cedro: '125',
+        roble: '150',
     }
 
     const selectorMueble = document.querySelector(".tipoMueble")
@@ -291,13 +302,12 @@
         muebleSeleccionado: null,
 
         mostrarDescripcion: function(){
-            if(!this.muebleSeleccionado){
-            return
-           } else if(this.muebleSeleccionado){
-            document.querySelector("#datos-resumen").hidden = false
-           } else if(this.muebleSeleccionado === ''){
-            document.querySelector("#datos-resumen").hidden = true
-           } 
+            if (!this.muebleSeleccionado) {
+                document.querySelector("#datos-resumen").hidden = true
+                return
+            }
+
+                document.querySelector("#datos-resumen").hidden = false
 
            resumenAltura.textContent = `Altura: ${this.muebleSeleccionado.altura} cm`
            resumenAncho.textContent = `Ancho: ${this.muebleSeleccionado.ancho} cm`
@@ -325,6 +335,16 @@
         
        
         precio: function(){
+
+              if(
+                !this.muebleSeleccionado.altura ||
+                !this.muebleSeleccionado.ancho ||
+                !this.muebleSeleccionado.profundidad ||
+                !this.muebleSeleccionado.tipoDeMadera
+            ){
+                return null
+            }
+
              let cantidad 
              
             switch(this.muebleSeleccionado.tipoMueble){
@@ -343,16 +363,26 @@
 
         const precioMadera = preciosTipoMaderas[this.muebleSeleccionado.tipoDeMadera]
 
-            return ((this.muebleSeleccionado.altura * this.muebleSeleccionado.ancho * this.muebleSeleccionado.profundidad + cantidad * 5)) * precioMadera 
+            return ((this.muebleSeleccionado.altura * this.muebleSeleccionado.ancho * this.muebleSeleccionado.profundidad + cantidad * 5)/1000) * precioMadera 
 
             
-        }
+        },
 
-        /*mostrarPrecio: function(){
+        mostrarPrecio: function(){
         const precioFinal = this.precio()
 
+        const boton = document.querySelector("#btn-presupuesto")
+
+             if(precioFinal === null){
+        resumenPrecio.textContent = "Precio: -"
+        boton.hidden = true
+        return
+        }   
+
         resumenPrecio.textContent = `Precio: $${precioFinal}`
-        }*/
+        boton.hidden = false
+    }
+
         
     }
 
@@ -371,65 +401,80 @@
         selectorMadera.disabled = false
     }
 
+    function limpiarFormulario() {
+
+    inputAltura.value = ""
+    inputAncho.value = ""
+    inputProfundidad.value = ""
+    selectorMadera.selectedIndex = 0
+    imputEstantes.value = ""
+    imputPuertas.value = ""
+    imputCajones.value = ""
+    }
+
     deshabilitarForm()
 
     selectorMueble.addEventListener('change', (e) => {
         const opcionElegida = e.target.value
-    if(opcionElegida !== ''){
-        habilitarForm()
-    } else{
-        deshabilitarForm()
+
+        limpiarFormulario()
+
+        if(opcionElegida !== ''){
+            habilitarForm()
+        } else{
+            deshabilitarForm()
+        }
+        if(opcionElegida === 'biblioteca') {
+            muebleSeleccionado = biblioteca, 
+            resumenMueble.muebleSeleccionado = biblioteca
+
+            bloqueEstantes.hidden = false, 
+            bloquePuertas.hidden = true, 
+            bloqueCajones.hidden = true
+        } else if(opcionElegida === 'placard') {
+            muebleSeleccionado = placard, 
+            resumenMueble.muebleSeleccionado = placard
+
+            bloquePuertas.hidden = false, 
+            bloqueEstantes.hidden = true, 
+            bloqueCajones.hidden = true
+        } else if(opcionElegida === 'comoda') {
+            muebleSeleccionado = comoda, 
+            resumenMueble.muebleSeleccionado = comoda
+
+            bloqueCajones.hidden = false, 
+            bloqueEstantes.hidden = true, 
+            bloquePuertas.hidden = true
+        } else{
+            muebleSeleccionado = null, 
+            resumenMueble.muebleSeleccionado = null
+
+            bloqueEstantes.hidden = true, 
+            bloquePuertas.hidden = true, 
+            bloqueCajones.hidden = true
     }
-    if(opcionElegida === 'biblioteca') {
-        muebleSeleccionado = biblioteca, 
-        resumenMueble.muebleSeleccionado = biblioteca
 
-        bloqueEstantes.hidden = false, 
-        bloquePuertas.hidden = true, 
-        bloqueCajones.hidden = true
-    } else if(opcionElegida === 'placard') {
-        muebleSeleccionado = placard, 
-        resumenMueble.muebleSeleccionado = placard
-
-        bloquePuertas.hidden = false, 
-        bloqueEstantes.hidden = true, 
-        bloqueCajones.hidden = true
-    } else if(opcionElegida === 'comoda') {
-        muebleSeleccionado = comoda, 
-        resumenMueble.muebleSeleccionado = comoda
-
-        bloqueCajones.hidden = false, 
-        bloqueEstantes.hidden = true, 
-        bloquePuertas.hidden = true
-    } else{
-        muebleSeleccionado = null, 
-        resumenMueble.muebleSeleccionado = null
-
-        bloqueEstantes.hidden = true, 
-        bloquePuertas.hidden = true, 
-        bloqueCajones.hidden = true
-    }
-
-    if(!opcionElegida){
-        document.querySelector('#miFormulario').reset();
-    } 
-    resumenMueble.mostrarDescripcion()
-
-    })
+    
 
     imputEstantes.addEventListener('input', (e) => {
         const cantidadEstantes = parseInt(e.target.value) 
         muebleSeleccionado.cantidadEstantes = cantidadEstantes
+        resumenMueble.mostrarDescripcion()
+        resumenMueble.mostrarPrecio()
     })
 
     imputPuertas.addEventListener('input', (e) => {
         const cantidadPuertas = parseInt(e.target.value) 
         muebleSeleccionado.cantidadPuertas = cantidadPuertas
+        resumenMueble.mostrarDescripcion()
+        resumenMueble.mostrarPrecio()
     })
 
     imputCajones.addEventListener('input', (e) => {
         const cantidadCajones = parseInt(e.target.value) 
         muebleSeleccionado.cantidadCajones = cantidadCajones
+        resumenMueble.mostrarDescripcion()
+        resumenMueble.mostrarPrecio()
     })
 
     inputAltura.addEventListener('input', (e) => {
@@ -442,6 +487,7 @@
         }
 
         resumenMueble.mostrarDescripcion()
+        resumenMueble.mostrarPrecio()
 
     })
 
@@ -455,7 +501,7 @@
         }
         
         resumenMueble.mostrarDescripcion()
-
+        resumenMueble.mostrarPrecio()
     })
 
     inputProfundidad.addEventListener('input', (e) => {
@@ -468,6 +514,7 @@
         }
         
         resumenMueble.mostrarDescripcion()
+        resumenMueble.mostrarPrecio()
 
     })
 
@@ -481,78 +528,19 @@
         }
 
         resumenMueble.mostrarDescripcion()
-
+        resumenMueble.mostrarPrecio()
     })
    
+    if(!opcionElegida){
+        document.querySelector('#miFormulario').reset();
+    } 
+    resumenMueble.mostrarDescripcion()
+    resumenMueble.mostrarPrecio()
+
+    })
+
 </script>
 
-<div class="container-presupuesto">
-    <div class="row">
-        <div class="col">
-            <form action="">
-                <div class="form-group">
-                    <label class="form-label" for="">Nombre completo</label>
-                    <input class="form-control" type="text" placeholder="Nombre completo">
-                </div>
-            </form>    
-        </div>
-
-        <div class="col">
-            <form action="">
-                <div class="form-group">
-                    <label class="form-label" for="">Dirección de correo electrónico</label>
-                    <input class="form-control" type="email" placeholder="usuario@gmail.com">
-                </div>
-            </form>
-        </div>
-        <div class="col">
-            <form action="">
-                <div class="form-group">
-                    <label class="form-label" for="">Número de teléfono</label>
-                    <input class="form-control" type="number" placeholder="Número">
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <form action="">
-                <div class="form-group">
-                    <label class="form-label" for="">Asunto</label>
-                    <input class="form-control" type="text" placeholder="Motivo de la consulta">
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <form action="">
-                <div class="form-group">
-                    <label class="form-label" for="">Mensaje</label>
-                    <input class="form-control" type="text-tarea" placeholder="Descripción de la consulta">
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <form action="">
-                <div class="form-group">
-                    <label class="form-label" for="">Archivos</label>
-                    <input class="form-control" type="file" placeholder="Foto, video, etc...">
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <form class="d-flex" role="search">
-                <button class="btn btn-outline-success-summit" type="submit">Enviar</button>
-                <button class="btn btn-outline-success-summit" type="reset">Borrar</button>
-            </form>
-        </div>
-    </div>
-</div>
 
 <footer> 
     
