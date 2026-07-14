@@ -42,12 +42,27 @@ background-color: rgb(255, 255, 255);
     color: #804000;
 }
 
-h1 {
+/*h1 {
     text-align: center;
     color: #804000;
     font-family: "Metamorphous", serif;
     font-style: italic;
     padding: 40px;
+}*/
+
+h1{
+
+    text-align:center;
+
+    color:#804000;
+
+    font-family:"Metamorphous", serif;
+
+    font-size:52px;
+
+    padding:60px 0 20px;
+
+    font-style:italic;
 }
 
 .datos-de-contacto {
@@ -77,18 +92,281 @@ footer{
     border-radius: 50px;
 }
 
-.carousel-item {
+/*.carousel-item {
     height: 500px;
+}*/
+
+.carousel-item{
+
+    height:550px;
+}
+
+.carousel-item img{
+
+    height:100%;
+
+    object-fit:cover;
+
+    filter:brightness(.75);
 }
 
 .container-calculadora-muebles {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
 }
-.calculadora-muebles {
+/*.calculadora-muebles {
     grid-column: 2/6;
+}*/
+
+h2{
+
+    color:#804000;
+
+    font-size:30px;
+
+    margin-bottom:30px;
 }
 
-.resumen-calculadora {
-    grid-column: 7/10;
+/*h2 {
+    text-align: left;
+    color: #804000;
+    font-style: italic;
+    text-decoration: underline
+    
+}   
+
+.calculadora-muebles {
+    background-color: #F5F5DC;
+    padding: 20px;
+    border-radius: 50px;
+}*/
+
+.container-calculadora-muebles{
+    max-width: 1300px;
+    margin: 60px auto;
+    padding: 0 30px;
+
+    display:grid;
+    grid-template-columns: 1.4fr .8fr;
+    gap:40px;
+    align-items:flex-start;
+}
+
+.calculadora-muebles{
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    border:1px solid #ececec;
+
+}
+
+.resumenMueble{
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    border:1px solid #ececec;
+
+    position:sticky;
+    top:30px;
+}
+
+.calculadora-muebles h2,
+.resumenMueble h3{
+
+    color:#804000;
+
+    margin-bottom:25px;
+
+    font-weight:700;
+
+    text-decoration:none;
+}
+
+.tipoMueble,
+.elegir-medidas,
+.elegir-tipo-madera,
+.cantidad-estantes,
+.cantidad-puertas,
+.cantidad-cajones{
+
+    margin-bottom:22px;
+}
+
+label{
+
+    display:block;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+    color:#5c3a21;
+}
+
+.form-control,
+.form-select{
+
+    height:50px;
+
+    border-radius:12px;
+
+    border:1px solid #d8d8d8;
+
+    transition:.25s;
+
+    box-shadow:none;
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#804000;
+
+    box-shadow:0 0 0 .2rem rgba(128,64,0,.15);
+}
+
+#medidas{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+}
+
+#medidas label{
+
+    margin-bottom:5px;
+}
+
+.list-group{
+
+    border:none;
+}
+
+.list-group li{
+
+    border:none;
+
+    margin-bottom:12px;
+
+    background:#fafafa;
+
+    padding:16px 20px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    color:#555;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+
+#resumen-precio{
+
+    background:rgb(0, 128, 21);
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    padding:20px;
+
+    border-radius:15px;
+}
+
+.resumenMueble p{
+
+    color:#777;
+
+    margin-bottom:20px;
+}
+
+.calculadora-muebles:hover,
+.resumenMueble:hover{
+
+    transform:translateY(-3px);
+
+    transition:.25s;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.12);
+}
+
+@media(max-width:992px){
+
+.container-calculadora-muebles{
+
+grid-template-columns:1fr;
+
+}
+
+#medidas{
+
+grid-template-columns:1fr;
+
+}
+
+.resumenMueble{
+
+position:static;
+
+}
+
+h1{
+
+font-size:38px;
+
+}
+
+}
+
+#btn-presupuesto{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#804000;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+#btn-presupuesto:hover{
+
+    background:#5f2f00;
+
+    transform:translateY(-2px);
 }
